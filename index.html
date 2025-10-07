@@ -1,23 +1,140 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Logo Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>idleito — a little bit of idle time</title>
+  <meta name="description" content="Idleito (eye-d'l-EE-toe): a little bit of idle time. You spotted the sticker — welcome to the cabana.">
+  <meta property="og:title" content="idleito">
+  <meta property="og:description" content="A little bit of idle time.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/logo.png">
+  <link rel="icon" href="/favicon.ico">
   <style>
-    body {
-      margin: 0;
-      background-color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    :root{
+      --orange:#f36c00; /* warm poolside orange */
+      --ink:#0d2236;    /* dark ink for text */
     }
-    img {
-      max-width: 90%;
-      height: auto;
+    html,body{height:100%;margin:0;}
+    body{
+      background:var(--orange);
+      color:white;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      display:flex;
+      /* start content from the top so tall logos don't get clipped in some viewports */
+      align-items:flex-start;
+      justify-content:center;
+      min-height:100vh;
+      /* give extra top space (and include any safe-area inset on phones) */
+      padding-top: calc(clamp(24px, 6vh, 80px) + env(safe-area-inset-top, 0px));
+      box-sizing: border-box;
+    }
+    .wrap{
+      text-align:center;
+      padding: clamp(16px, 4vw, 48px);
+      max-width: 900px;
+      width:100%;
+      animation: fadeIn 800ms ease-out both;
+    }
+    @keyframes fadeIn { from{opacity:0; transform: translateY(8px)} to{opacity:1; transform: none} }
+    .logo{
+      width:min(72vmin, 520px);
+      height:auto;
+      filter: drop-shadow(0 18px 30px rgba(0,0,0,.25));
+      transition: transform .2s ease;
+      user-select: none;
+    }
+    .logo:hover{ transform: scale(1.03) rotate(-0.5deg); }
+    h1{
+      margin: 18px 0 8px;
+      font-size: clamp(28px, 6vw, 56px);
+      letter-spacing: 0.02em;
+    }
+    .pronounce{
+      font-size: clamp(14px, 2.6vw, 18px);
+      opacity:.95;
+    }
+    .tagline{
+      font-size: clamp(16px, 3vw, 22px);
+      margin-top: 6px;
+      opacity:.98;
+    }
+    .card{
+      margin: 22px auto 0;
+      background: rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: clamp(14px, 3.2vw, 22px);
+      backdrop-filter: blur(2px);
+      text-align:left;
+      color: #fff;
+      max-width: 680px;
+      box-shadow: 0 6px 18px rgba(0,0,0,.18);
+    }
+    .card p{margin: 0 0 10px; line-height: 1.45;}
+    details {
+      margin-top: 8px;
+    }
+    summary{
+      cursor:pointer;
+      list-style:none;
+      font-weight:600;
+    }
+    summary::-webkit-details-marker{display:none;}
+    .btnrow{
+      margin-top: 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .btn{
+      background:#fff;
+      color: var(--ink);
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: none;
+      text-decoration:none;
+      font-weight:700;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,.15);
+    }
+    .btn:hover{ transform: translateY(-1px); box-shadow: 0 6px 14px rgba(0,0,0,.2); }
+    footer{
+      margin-top: 18px;
+      font-size: 13px;
+      opacity:.9;
+    }
+    .heart{ animation: beat 1.6s infinite; display:inline-block; }
+    @keyframes beat{ 0%,100%{ transform: scale(1)} 50%{ transform:scale(1.12)}}
+    /* Accessibility: prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce){
+      .logo, .btn, .heart { animation: none; transition: none; }
     }
   </style>
 </head>
 <body>
-  <img src="idleito.PNG" alt="idleito">
+  <main class="wrap" role="main">
+    <img src="assets/logo.png" alt="idleito logo — friendly dog holding a martini" class="logo" />
+    <h1>idleito</h1>
+    <div class="pronounce"><em>(eye‑d'l‑EE‑toe)</em></div>
+    <div class="tagline">a little bit of idle time</div>
+
+    <section class="card" aria-label="About idleito">
+      <p>You found the sticker! Idleito is our poolside cabana spirit — where good friends, sunny vibes, and just‑enough mischief come together.</p>
+      <details>
+        <summary>What’s the story?</summary>
+        <p>We take these stickers on our travels. If one led you here, consider this your invitation to pause, sip something tasty, and enjoy a little idle time.</p>
+      </details>
+      <div class="btnrow">
+        <a class="btn" href="#" onclick="navigator.share ? navigator.share({title:'idleito', text:'I found an idleito sticker!', url: location.href}) : alert('Copy the link and share the idleito vibes!'); return false;">Share this</a>
+        <a class="btn" href="#souvenirs">Sticker spotted?</a>
+      </div>
+    </section>
+
+    <section id="souvenirs" class="card" aria-label="Souvenirs">
+      <p><strong>Sticker spotted?</strong> Snap a pic and tag it <code>#idleito</code>. No prize, just bragging rights and good taste.</p>
+    </section>
+
+    <footer>Made with a splash of idle time <span class="heart">♥</span></footer>
+  </main>
 </body>
 </html>
